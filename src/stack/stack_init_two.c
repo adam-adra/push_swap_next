@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
+#include "push_swap.h"
 
 void	stack_add_last(t_stack **head, t_stack *node)
 {
@@ -70,4 +70,39 @@ float	compute_disorder(t_stack *a)
 	}
 	disorder = mistake / total_pairs;
 	return (disorder);
+}
+
+void	stack_free_all(t_data *stack)
+{
+	if (!stack)
+		return ;
+	stack_free(&stack->a);
+	stack_free(&stack->b);
+	free(stack);
+	stack = NULL;
+}
+
+t_data	data_init(void)
+{
+	t_data	data;
+
+	data.a = NULL;
+	data.b = NULL;
+	data.bench = 0;
+	data.strategy = 3;
+	data.strategy_set = 0;
+	data.stats.total_ops = 0;
+	data.stats.sa_count = 0;
+	data.stats.sb_count = 0;
+	data.stats.ss_count = 0;
+	data.stats.pa_count = 0;
+	data.stats.pb_count = 0;
+	data.stats.ra_count = 0;
+	data.stats.rb_count = 0;
+	data.stats.rr_count = 0;
+	data.stats.rra_count = 0;
+	data.stats.rrb_count = 0;
+	data.stats.rrr_count = 0;
+	data.stats.disorder = 0;
+	return (data);
 }

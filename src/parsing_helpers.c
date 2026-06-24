@@ -9,7 +9,7 @@
 /*   Updated: 2026-01-05 01:31:58 by adadra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static int	ft_isspace(char c)
 {
@@ -61,7 +61,7 @@ int	is_number(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' || str[i] == '+') && (ft_isdigit(str[i + 1]) == 1))
 		i++;
 	while (str[i])
 	{
@@ -70,4 +70,27 @@ int	is_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	is_duplicate(t_stack	**head)
+{
+	t_stack	*first;
+	t_stack	*tmp;
+
+	if (!head)
+		return ;
+	first = *head;
+	tmp = NULL;
+	while (*head)
+	{
+		tmp = (*head)->next;
+		while (tmp)
+		{
+			if ((*head)->value == tmp->value)
+				print_error(&first);
+			tmp = tmp->next;
+		}
+		*head = (*head)->next;
+	}
+	*head = first;
 }
